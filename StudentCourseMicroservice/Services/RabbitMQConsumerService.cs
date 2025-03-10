@@ -13,16 +13,13 @@ public class RabbitMQConsumerService
 
     public RabbitMQConsumerService(IConfiguration configuration)
     {
-        // Reading RabbitMQ host and queue name from configuration
         _host = configuration["RabbitMQ:Host"];
         _queueName = configuration["RabbitMQ:QueueName"];
-
-        // Initialize RabbitMQ connection and channel
+        
         var factory = new ConnectionFactory() { HostName = _host };
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
-
-        // Declare the queue
+        
         _channel.QueueDeclare(queue: _queueName,
             durable: false,
             exclusive: false,
