@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UniversityManagementAPI.Data;
 using UniversityManagementAPI.Middleware;
-using UniversityManagementAPI.Services; // Add this line for RabbitMQService
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +9,11 @@ builder.Services.AddDbContext<UniversityDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<TenantMiddleware>();
-// Register RabbitMQ Service
-builder.Services.AddSingleton<RabbitMQService>();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "Admin API", Version = "v1" });
+});
 
 // Register HttpClient for communication with microservices
 builder.Services.AddHttpClient();
