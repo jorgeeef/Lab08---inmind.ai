@@ -35,7 +35,6 @@ public class RabbitMQConsumerService
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                // Process message (like adding new course or enrollments)
                 Console.WriteLine($"Received: {message}");
             };
             channel.BasicConsume(queue: _queueName,

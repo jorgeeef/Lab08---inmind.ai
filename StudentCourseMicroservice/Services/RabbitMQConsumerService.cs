@@ -5,7 +5,7 @@ using RabbitMQ.Client.Events;
 using Microsoft.Extensions.Configuration;
 
 public class RabbitMQConsumerService
-{
+{  
     private readonly string _host;
     private readonly string _queueName;
     private readonly IConnection _connection;
